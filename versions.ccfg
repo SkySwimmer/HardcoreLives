@@ -19,7 +19,7 @@ channelFiles> {
 
     @fallback> {
         urls> {
-            @fallback> 'https://aerialworks.ddns.net/maven/org/asf/mods/HarcoreSpectator/%v/HarcoreSpectator-%v.cmf'
+            @fallback> 'https://aerialworks.ddns.net/maven/org/asf/mods/HardcoreSpectator/%v/HardcoreSpectator-%v.cmf'
         }
     }
 
