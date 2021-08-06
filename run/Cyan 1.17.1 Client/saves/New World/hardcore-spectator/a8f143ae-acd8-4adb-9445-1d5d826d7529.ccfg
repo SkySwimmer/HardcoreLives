@@ -1,9 +1,0 @@
-# Last recorded playername (not used by the system, purely for file identification
-playerName> 'stefan0436'
-
-# The amount of recorded player deaths
-deaths> 0
-
-# This will tell the system to show a title if the player died,
-# if true, this won't be shown (automatically assigned by the mod)
-markedDead> false
