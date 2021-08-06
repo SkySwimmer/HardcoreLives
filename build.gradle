@@ -227,6 +227,9 @@ cmf {
             // Automatic updates
 			updateserver "https://aerialworks.ddns.net/cyan/trust/download"
 			
+			// Game version
+			game_version gameVersion.replace(".", "\\."), "only " + gameVersion
+			
 			//
 			// Add dependencies like this:
 			// dependency 'modgroup:modid', '>=greater-than-version'
