@@ -1,0 +1,8 @@
+modVersion> '1.1-1.17.1'
+gameVersion> '1.17.1'
+platform> 'DEOBFUSCATED'
+platformVersion> '-'
+
+trustContainers> {
+    Main Trust hooks protocol@1628254307-333000000> 'https://aerialworks.ddns.net/cyan/trust/download'
+}
