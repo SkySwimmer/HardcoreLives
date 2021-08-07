@@ -91,7 +91,7 @@ public class LivesCommand extends CyanComponent implements Command {
 		for (ServerPlayer player : players) {
 
 			@SuppressWarnings("resource")
-			int lives = mod.getConfig().lives - mod.getPlayerInfo(context.getServer(), player.getUUID()).deaths;
+			int lives = mod.getLives(context.getServer()) - mod.getPlayerInfo(context.getServer(), player.getUUID()).deaths;
 			if (lives < 0)
 				lives = 0;
 

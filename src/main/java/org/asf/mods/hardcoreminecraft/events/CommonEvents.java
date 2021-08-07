@@ -81,18 +81,19 @@ public class CommonEvents implements IEventListenerContainer {
 					break;
 				}
 
-				if (mod.getConfig().disable)
+				if (mod.isDisabled(obj.getServer()))
 					continue;
 
 				while (true) {
 					try {
 						for (PlayerInfo info : playersF.values()) {
 							info.updatePlayer(obj.getServer());
-							if ((info.dying && !info.player.isDeadOrDying()) || (info.deaths >= mod.getConfig().lives
-									&& !info.markedDead && !info.player.isDeadOrDying())) {
+							if ((info.dying && !info.player.isDeadOrDying())
+									|| (info.deaths >= mod.getLives(obj.getServer()) && !info.markedDead
+											&& !info.player.isDeadOrDying())) {
 								info.dying = false;
 
-								if (info.deaths >= mod.getConfig().lives) {
+								if (info.deaths >= mod.getLives(obj.getServer())) {
 									info.player.setGameMode(GameType.SPECTATOR);
 
 									obj.getServer().getPlayerList().broadcastMessage(
@@ -114,50 +115,46 @@ public class CommonEvents implements IEventListenerContainer {
 									} catch (IOException e) {
 									}
 								} else {
-									if ((mod.getConfig().lives - info.deaths) <= 2
-											&& (mod.getConfig().lives - info.deaths) > 0) {
+									if ((mod.getLives(obj.getServer()) - info.deaths) <= 2
+											&& (mod.getLives(obj.getServer()) - info.deaths) > 0) {
 										obj.getServer().getPlayerList()
 												.broadcastMessage(
-														new TextComponent(
-																mod.getMessageConfig().lastDeathMessages
-																		.replace("%p",
-																				info.player.getDisplayName()
-																						.getString())
-																		.replace("%l",
-																				Integer.toString(mod.getConfig().lives
-																						- info.deaths))),
+														new TextComponent(mod.getMessageConfig().lastDeathMessages
+																.replace("%p", info.player.getDisplayName().getString())
+																.replace("%l",
+																		Integer.toString(mod.getLives(obj.getServer())
+																				- info.deaths))),
 														ChatType.SYSTEM, Util.NIL_UUID);
-									} else if (mod.getConfig().lives - info.deaths > 0) {
+									} else if (mod.getLives(obj.getServer()) - info.deaths > 0) {
 										obj.getServer().getPlayerList()
 												.broadcastMessage(
-														new TextComponent(
-																mod.getMessageConfig().firstDeathMessages
-																		.replace("%p",
-																				info.player.getDisplayName()
-																						.getString())
-																		.replace("%l",
-																				Integer.toString(mod.getConfig().lives
-																						- info.deaths))),
+														new TextComponent(mod.getMessageConfig().firstDeathMessages
+																.replace("%p", info.player.getDisplayName().getString())
+																.replace("%l",
+																		Integer.toString(mod.getLives(obj.getServer())
+																				- info.deaths))),
 														ChatType.SYSTEM, Util.NIL_UUID);
 									}
 
-									if (mod.getConfig().lives - info.deaths > 0) {
+									if (mod.getLives(obj.getServer()) - info.deaths > 0) {
 										info.player.showTitle(MinecraftTitle.create()
 												.setIntervalConfiguration(TitleIntervalConfiguration.create(10, 30, 10))
+												.addComponent(TitleComponent.create(TitleType.TITLE,
+														mod.getMessageConfig().deathTitle
+																.replace("%p", info.player.getDisplayName().getString())
+																.replace("%l",
+																		Integer.toString(mod.getLives(obj.getServer())
+																				- info.deaths))))
 												.addComponent(
-														TitleComponent.create(TitleType.TITLE,
-																mod.getMessageConfig().deathTitle
+														TitleComponent.create(TitleType.SUBTITLE,
+																mod.getMessageConfig().deathSubtitle
 																		.replace("%p",
 																				info.player.getDisplayName()
 																						.getString())
 																		.replace("%l",
-																				Integer.toString(mod.getConfig().lives
-																						- info.deaths))))
-												.addComponent(TitleComponent.create(TitleType.SUBTITLE,
-														mod.getMessageConfig().deathSubtitle
-																.replace("%p", info.player.getDisplayName().getString())
-																.replace("%l", Integer.toString(
-																		mod.getConfig().lives - info.deaths)))));
+																				Integer.toString(
+																						mod.getLives(obj.getServer())
+																								- info.deaths)))));
 									}
 								}
 							}
@@ -183,7 +180,7 @@ public class CommonEvents implements IEventListenerContainer {
 	@SimpleEvent(ChatEvent.class)
 	public void onChat(ChatEventObject obj) throws IOException {
 		HardcoreSpectator mod = HardcoreSpectator.getInstance(HardcoreSpectator.class);
-		if (mod.getConfig().disable)
+		if (mod.isDisabled(obj.getServer()))
 			return;
 
 		HashMap<String, PlayerInfo> players = servers.get(obj.getServer());
@@ -206,7 +203,7 @@ public class CommonEvents implements IEventListenerContainer {
 		}
 
 		PlayerInfo info = players.get(obj.getPlayer().getUUID().toString());
-		if (info.deaths >= mod.getConfig().lives) {
+		if (info.deaths >= mod.getLives(obj.getServer())) {
 			obj.setFormatter((msg, pl) -> {
 				return new TextComponent(mod.getMessageConfig().spectatorMessagePrefix + "<"
 						+ mod.getMessageConfig().spectatorMessagePrefix + pl.getDisplayName().getString()
@@ -234,7 +231,7 @@ public class CommonEvents implements IEventListenerContainer {
 		}
 
 		players.put(obj.getPlayer().getUUID().toString(), info);
-		if (info.deaths >= HardcoreSpectator.getInstance(HardcoreSpectator.class).getConfig().lives) {
+		if (info.deaths >= HardcoreSpectator.getInstance(HardcoreSpectator.class).getLives(obj.getServer())) {
 			obj.getPlayer().setGameMode(GameType.SPECTATOR);
 		}
 	}
@@ -255,7 +252,7 @@ public class CommonEvents implements IEventListenerContainer {
 	@SimpleEvent(PlayerDeathEvent.class)
 	public void onDeath(PlayerDamageEventObject obj) throws IOException {
 		HardcoreSpectator mod = HardcoreSpectator.getInstance(HardcoreSpectator.class);
-		if (mod.getConfig().disable)
+		if (mod.isDisabled(obj.getServer()))
 			return;
 
 		HashMap<String, PlayerInfo> players = servers.get(obj.getServer());

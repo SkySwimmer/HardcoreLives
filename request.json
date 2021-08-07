@@ -1,6 +1,0 @@
-{
-    "tag_name": "1.0.0.A2",
-    "name": "Release 1.0.0.A2",
-    "body": "Alpha build 1.0.0.A2\n\nSupported game versions:\n- Minecraft 1.16.5\n- Minecraft 1.17\n- Minecraft 1.17.1\n\nDependencies:\n- [ProtocolHooks](https://github.com/Stefan0436/ProtocolHooks/releases/1.1) 1.1\n- [Cyan](https://aerialworks.ddns.net/cyan) 1.0.0.A14\n- [ModKit](https://aerialworks.ddns.net/maven/org/asf/cyan/ModKit) 1.2 (part of Cyan)",
-    "prerelease": true
-}

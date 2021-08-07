@@ -25,7 +25,7 @@ apply from: "asf.mvn.publish.gradle"
 
 // Project information
 group="org.asf.mods"
-version="1.0.0.A2"
+version="1.0.0.A3"
 
 def mod_id = "spectator"
 def mod_group = "hardcore"

@@ -11,17 +11,17 @@ public class HcspCommand implements Command {
 
 	@Override
 	public String getId() {
-		return "hcsp";
+		return "hcsm";
 	}
 
 	@Override
 	public String getDisplayName() {
-		return "Hardcore Spectator (hcsp)";
+		return "Hardcore Spectator (hcsm)";
 	}
 
 	@Override
 	public String getDescription() {
-		return "HCSP Command Line Utilitiy";
+		return "HCSM Command Line Utilitiy";
 	}
 
 	@Override

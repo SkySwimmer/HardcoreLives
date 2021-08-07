@@ -41,8 +41,7 @@ public class ReloadCommand extends CyanComponent implements Command {
 		boolean error = false;
 		HardcoreSpectator mod = HardcoreSpectator.getInstance(HardcoreSpectator.class);
 		try {
-			HardcoreSpectator.getInstance(HardcoreSpectator.class).getConfig().readAll();
-			HardcoreSpectator.getInstance(HardcoreSpectator.class).getMessageConfig().readAll();
+			HardcoreSpectator.getInstance(HardcoreSpectator.class).reload();
 			HardcoreSpectator.getInstance(HardcoreSpectator.class).getPlayers(context.getServer()).forEach(t -> {
 				try {
 					t.getInfo().readAll();

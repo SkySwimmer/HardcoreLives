@@ -1,6 +1,9 @@
 package org.asf.mods.hardcoreminecraft;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,6 +13,7 @@ import modkit.util.Colors;
 import modkit.util.ContainerConditions;
 import modkit.util.EventUtil;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.level.storage.LevelResource;
 
 import org.asf.cyan.api.modloader.Modloader;
 import org.asf.cyan.api.modloader.information.game.GameSide;
@@ -19,6 +23,7 @@ import org.asf.cyan.mods.events.AttachEvent;
 import org.asf.mods.hardcoreminecraft.config.HardcoreConfiguration;
 import org.asf.mods.hardcoreminecraft.config.MessageConfiguration;
 import org.asf.mods.hardcoreminecraft.config.PlayerInfo;
+import org.asf.mods.hardcoreminecraft.config.WorldConfiguration;
 import org.asf.mods.hardcoreminecraft.events.CommonEvents;
 
 public class HardcoreSpectator extends AbstractMod {
@@ -66,8 +71,52 @@ public class HardcoreSpectator extends AbstractMod {
 		return getClass().getPackageName() + ".events.CommandEvents";
 	}
 
-	public HardcoreConfiguration getConfig() {
-		return hardcoreConfig;
+	private HashMap<MinecraftServer, WorldConfiguration> configs = new HashMap<MinecraftServer, WorldConfiguration>();
+
+	public boolean isDisabled(MinecraftServer server) {
+		if (server == null)
+			return hardcoreConfig.disable;
+		else {
+			if (!configs.containsKey(server)) {
+				File f = server.getWorldPath(LevelResource.ROOT).toFile();
+				if (!f.exists())
+					f.mkdir();
+
+				WorldConfiguration conf = new WorldConfiguration(f.getAbsolutePath());
+				conf.lives = hardcoreConfig.lives;
+				conf.disable = hardcoreConfig.disable;
+				try {
+					conf.readAll();
+					conf.writeAll();
+				} catch (IOException e) {
+				}
+				configs.put(server, conf);
+			}
+			return configs.get(server).disable;
+		}
+	}
+
+	public int getLives(MinecraftServer server) {
+		if (server == null)
+			return hardcoreConfig.lives;
+		else {
+			if (!configs.containsKey(server)) {
+				File f = server.getWorldPath(LevelResource.ROOT).toFile();
+				if (!f.exists())
+					f.mkdir();
+
+				WorldConfiguration conf = new WorldConfiguration(f.getAbsolutePath());
+				conf.lives = hardcoreConfig.lives;
+				conf.disable = hardcoreConfig.disable;
+				try {
+					conf.readAll();
+					conf.writeAll();
+				} catch (IOException e) {
+				}
+				configs.put(server, conf);
+			}
+			return configs.get(server).lives;
+		}
 	}
 
 	public MessageConfiguration getMessageConfig() {
@@ -87,6 +136,11 @@ public class HardcoreSpectator extends AbstractMod {
 		}
 	}
 
+	public void shutdownServer(MinecraftServer server) {
+		if (configs.containsKey(server))
+			configs.remove(server);
+	}
+
 	public List<PlayerData> getPlayers(MinecraftServer server) {
 		return List.of(CommonEvents.getAllPlayers(server).stream().map(t -> {
 			PlayerData p = new PlayerData();
@@ -103,6 +157,17 @@ public class HardcoreSpectator extends AbstractMod {
 				return pl;
 		}
 		return null;
+	}
+
+	public void reload() throws IOException {
+		hardcoreConfig.readAll();
+		for (MinecraftServer srv : new ArrayList<MinecraftServer>(configs.keySet())) {
+			if (srv.isRunning())
+				configs.get(srv).readAll();
+			else
+				configs.remove(srv);
+		}
+		messages.readAll();
 	}
 
 }

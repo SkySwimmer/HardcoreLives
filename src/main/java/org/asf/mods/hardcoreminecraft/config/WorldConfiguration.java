@@ -1,16 +1,17 @@
 package org.asf.mods.hardcoreminecraft.config;
 
-import java.io.IOException;
-
-import modkit.config.ModConfiguration;
-
+import org.asf.cyan.api.config.Configuration;
 import org.asf.cyan.api.config.annotations.Comment;
-import org.asf.mods.hardcoreminecraft.HardcoreSpectator;
 
-public class HardcoreConfiguration extends ModConfiguration<HardcoreConfiguration, HardcoreSpectator> {
+public class WorldConfiguration extends Configuration<WorldConfiguration> {
 
-	public HardcoreConfiguration(HardcoreSpectator instance) throws IOException {
-		super(instance);
+	public WorldConfiguration(String base) {
+		super(base);
+	}
+
+	@Override
+	public String folder() {
+		return "";
 	}
 
 	@Override

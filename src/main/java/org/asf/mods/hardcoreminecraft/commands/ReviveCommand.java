@@ -74,7 +74,7 @@ public class ReviveCommand extends CyanComponent implements Command {
 			for (ServerPlayer pl : players) {
 				PlayerInfo d = mod.getPlayerInfo(context.getServer(), pl.getUUID());
 				if (d != null) {
-					if (d.deaths >= mod.getConfig().lives) {
+					if (d.deaths >= mod.getLives(context.getServer())) {
 						d.deaths = 0;
 						d.dying = false;
 						d.markedDead = false;
