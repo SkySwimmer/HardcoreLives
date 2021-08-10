@@ -32,7 +32,7 @@ public class HclmCommand implements Command {
 
 	@Override
 	public String getDescription() {
-		return "HCSM Command Line Utilitiy";
+		return "HCLM Command Line Utilitiy";
 	}
 
 	@Override
