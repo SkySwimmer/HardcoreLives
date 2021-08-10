@@ -11,7 +11,6 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import modkit.commands.Command;
 import modkit.commands.CommandManager;
-import modkit.permissions.PermissionManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -51,16 +50,8 @@ public class LivesCommand extends CyanComponent implements Command {
 			LiteralArgumentBuilder<CommandSourceStack> cmd) {
 		CommandContainer container = CommandContainer.getFor(this);
 
-		cmd = cmd.requires(t -> {
-			try {
-				return PermissionManager.getInstance().hasPermission(t.getEntityOrException(), getPermission());
-			} catch (CommandSyntaxException ex) {
-				return t.hasPermission(5);
-			}
-		});
-		cmd.executes(t -> {
-			return execute(CommandExecutionContext.getNew(t));
-		});
+		cmd = cmd.requires(t -> hasPermission(t));
+		cmd = cmd.executes(t -> execute(CommandExecutionContext.getNew(t)));
 
 		container.add(Commands.argument("players", EntityArgument.players()));
 		container.attachPermission("cyan.commands.player.hardcore.spectator.lives.others", 0);

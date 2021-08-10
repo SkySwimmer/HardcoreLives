@@ -50,6 +50,9 @@ public class ReviveCommand extends CyanComponent implements Command {
 	@Override
 	public LiteralArgumentBuilder<CommandSourceStack> setupCommand(CommandManager manager,
 			LiteralArgumentBuilder<CommandSourceStack> cmd) {
+
+		cmd = cmd.requires(t -> hasPermission(t));
+		
 		CommandContainer container = CommandContainer.getFor(this);
 
 		container.add(Commands.argument("players", EntityArgument.players()));
