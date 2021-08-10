@@ -21,7 +21,7 @@ public class HclmCommand implements Command {
 
 	@Override
 	public String getDisplayName() {
-		return "Hardcore Spectator (hclm)";
+		return "Hardcore Lives (hclm)";
 	}
 
 	@Override // Prevent execution if no arguments are present
