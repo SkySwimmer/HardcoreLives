@@ -74,7 +74,7 @@ public class HardcoreLives extends AbstractMod {
 	private HashMap<MinecraftServer, WorldConfiguration> configs = new HashMap<MinecraftServer, WorldConfiguration>();
 
 	public boolean isDisabled(MinecraftServer server) {
-		if (server == null)
+		if (server == null || getModloader().getGameSide() == GameSide.SERVER)
 			return hardcoreConfig.disable;
 		else {
 			if (!configs.containsKey(server)) {
@@ -97,7 +97,7 @@ public class HardcoreLives extends AbstractMod {
 	}
 
 	public int getLives(MinecraftServer server) {
-		if (server == null)
+		if (server == null || getModloader().getGameSide() == GameSide.SERVER)
 			return hardcoreConfig.lives;
 		else {
 			if (!configs.containsKey(server)) {
