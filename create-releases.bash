@@ -86,7 +86,7 @@ if [ "$prerelease" == "Y" ] || [ "$prerelease" == "y" ]; then
     
     while : ; do
         echo Publishing github release....
-        response="$(echo "$json" | curl -s https://api.github.com/repos/SkySwimmer/HardcoreSpectator/releases -H "Accept: application/vnd.github.v3+json" --data-binary @- -X POST -H "Authorization: token $token")"
+        response="$(echo "$json" | curl -s https://api.github.com/repos/SkySwimmer/HardcoreLives/releases -H "Accept: application/vnd.github.v3+json" --data-binary @- -X POST -H "Authorization: token $token")"
         id="$(echo "$response" | jq .id -r)"
         if [ "$id" == "null" ]; then
             1>&2 echo Failure!
@@ -99,10 +99,10 @@ if [ "$prerelease" == "Y" ] || [ "$prerelease" == "y" ]; then
     
     echo Publishing files...
     for file in build/cmf/*.cmf ; do
-       curl -s "https://uploads.github.com/repos/SkySwimmer/HardcoreSpectator/releases/$id/assets?name=$(basename "$file")" -X POST -H "Content-Type: application/octet-stream" --data-binary "@$file" -H "Authorization: token $token" > /dev/null
+       curl -s "https://uploads.github.com/repos/SkySwimmer/HardcoreLives/releases/$id/assets?name=$(basename "$file")" -X POST -H "Content-Type: application/octet-stream" --data-binary "@$file" -H "Authorization: token $token" > /dev/null
     done
     for file in build/libs/*.jar ; do
-       curl -s "https://uploads.github.com/repos/SkySwimmer/HardcoreSpectator/releases/$id/assets?name=$(basename "$file")" -X POST -H "Content-Type: application/octet-stream" --data-binary "@$file" -H "Authorization: token $token" > /dev/null
+       curl -s "https://uploads.github.com/repos/SkySwimmer/HardcoreLives/releases/$id/assets?name=$(basename "$file")" -X POST -H "Content-Type: application/octet-stream" --data-binary "@$file" -H "Authorization: token $token" > /dev/null
     done
     
     echo Done.

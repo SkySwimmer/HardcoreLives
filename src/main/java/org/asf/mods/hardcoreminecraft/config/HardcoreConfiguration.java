@@ -5,17 +5,17 @@ import java.io.IOException;
 import modkit.config.ModConfiguration;
 
 import org.asf.cyan.api.config.annotations.Comment;
-import org.asf.mods.hardcoreminecraft.HardcoreSpectator;
+import org.asf.mods.hardcoreminecraft.HardcoreLives;
 
-public class HardcoreConfiguration extends ModConfiguration<HardcoreConfiguration, HardcoreSpectator> {
+public class HardcoreConfiguration extends ModConfiguration<HardcoreConfiguration, HardcoreLives> {
 
-	public HardcoreConfiguration(HardcoreSpectator instance) throws IOException {
+	public HardcoreConfiguration(HardcoreLives instance) throws IOException {
 		super(instance);
 	}
 
 	@Override
 	public String filename() {
-		return "hardcore-spectator.ccfg";
+		return "hardcore-lives.ccfg";
 	}
 
 	@Comment("The amount of lives each starting player has")

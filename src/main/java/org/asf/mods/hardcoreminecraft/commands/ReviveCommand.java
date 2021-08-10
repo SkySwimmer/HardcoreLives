@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.asf.cyan.api.common.CyanComponent;
-import org.asf.mods.hardcoreminecraft.HardcoreSpectator;
+import org.asf.mods.hardcoreminecraft.HardcoreLives;
 import org.asf.mods.hardcoreminecraft.config.PlayerInfo;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -24,7 +24,7 @@ public class ReviveCommand extends CyanComponent implements Command {
 
 	@Override
 	public String getPermission() {
-		return "cyan.commands.admin.hardcore.spectator.revive";
+		return "cyan.commands.admin.hardcore.lives.revive";
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class ReviveCommand extends CyanComponent implements Command {
 		} catch (CommandSyntaxException e) {
 			throw new RuntimeException(e);
 		}
-		HardcoreSpectator mod = HardcoreSpectator.getInstance(HardcoreSpectator.class);
+		HardcoreLives mod = HardcoreLives.getInstance(HardcoreLives.class);
 		if (players != null) {
 			for (ServerPlayer pl : players) {
 				PlayerInfo d = mod.getPlayerInfo(context.getServer(), pl.getUUID());

@@ -39,7 +39,7 @@ import java.util.List;
 import org.asf.cyan.mods.AbstractMod;
 import org.asf.cyan.mods.events.IEventListenerContainer;
 import org.asf.cyan.mods.events.SimpleEvent;
-import org.asf.mods.hardcoreminecraft.HardcoreSpectator;
+import org.asf.mods.hardcoreminecraft.HardcoreLives;
 import org.asf.mods.hardcoreminecraft.config.PlayerInfo;
 
 import com.google.gson.JsonObject;
@@ -70,7 +70,7 @@ public class CommonEvents implements IEventListenerContainer {
 		}
 
 		final HashMap<String, PlayerInfo> playersF = players;
-		HardcoreSpectator mod = HardcoreSpectator.getInstance(HardcoreSpectator.class);
+		HardcoreLives mod = HardcoreLives.getInstance(HardcoreLives.class);
 
 		new Thread(() -> {
 			while (obj.getServer().isRunning() && servers.containsKey(obj.getServer())) {
@@ -164,7 +164,7 @@ public class CommonEvents implements IEventListenerContainer {
 					}
 				}
 			}
-		}, "Hardcore Spectator Player Manager").start();
+		}, "Hardcore: Lives Player Manager").start();
 	}
 
 	public static List<PlayerInfo> getAllPlayers(MinecraftServer server) {
@@ -179,7 +179,7 @@ public class CommonEvents implements IEventListenerContainer {
 
 	@SimpleEvent(ChatEvent.class)
 	public void onChat(ChatEventObject obj) throws IOException {
-		HardcoreSpectator mod = HardcoreSpectator.getInstance(HardcoreSpectator.class);
+		HardcoreLives mod = HardcoreLives.getInstance(HardcoreLives.class);
 		if (mod.isDisabled(obj.getServer()))
 			return;
 
@@ -231,7 +231,7 @@ public class CommonEvents implements IEventListenerContainer {
 		}
 
 		players.put(obj.getPlayer().getUUID().toString(), info);
-		if (info.deaths >= HardcoreSpectator.getInstance(HardcoreSpectator.class).getLives(obj.getServer())) {
+		if (info.deaths >= HardcoreLives.getInstance(HardcoreLives.class).getLives(obj.getServer())) {
 			obj.getPlayer().setGameMode(GameType.SPECTATOR);
 		}
 	}
@@ -251,7 +251,7 @@ public class CommonEvents implements IEventListenerContainer {
 
 	@SimpleEvent(PlayerDeathEvent.class)
 	public void onDeath(PlayerDamageEventObject obj) throws IOException {
-		HardcoreSpectator mod = HardcoreSpectator.getInstance(HardcoreSpectator.class);
+		HardcoreLives mod = HardcoreLives.getInstance(HardcoreLives.class);
 		if (mod.isDisabled(obj.getServer()))
 			return;
 
@@ -282,7 +282,7 @@ public class CommonEvents implements IEventListenerContainer {
 
 	@SimpleEvent(ResourceManagerStartupEvent.class)
 	public void resourceManagerStartup(ResourceManagerEventObject event) {
-		loadLanguage(Resources.getFor(AbstractMod.getInstance(HardcoreSpectator.class)).getResource("lang/en_us.json"));
+		loadLanguage(Resources.getFor(AbstractMod.getInstance(HardcoreLives.class)).getResource("lang/en_us.json"));
 	}
 
 	private void loadLanguage(Resource resource) {

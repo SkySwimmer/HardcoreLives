@@ -47,7 +47,7 @@ public class PlayerInfo extends Configuration<PlayerInfo> {
 
 	@Override
 	public String folder() {
-		return "hardcore-spectator";
+		return "hardcore-lives";
 	}
 
 	public void updatePlayer(MinecraftServer server) {

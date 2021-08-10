@@ -3,7 +3,7 @@ package org.asf.mods.hardcoreminecraft.commands;
 import java.util.List;
 
 import org.asf.cyan.api.common.CyanComponent;
-import org.asf.mods.hardcoreminecraft.HardcoreSpectator;
+import org.asf.mods.hardcoreminecraft.HardcoreLives;
 import org.fusesource.jansi.Ansi.Color;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -79,7 +79,7 @@ public class LivesCommand extends CyanComponent implements Command {
 		} catch (CommandSyntaxException e) {
 		}
 
-		HardcoreSpectator mod = HardcoreSpectator.getInstance(HardcoreSpectator.class);
+		HardcoreLives mod = HardcoreLives.getInstance(HardcoreLives.class);
 		if (players == null && context.getPlayer() == null) {
 			context.failure(new TextComponent(
 					mod.getMessageConfig().systemMessagePrefix + " " + Color.RED + "No players specified!"));

@@ -1,4 +1,4 @@
-# Hardcore: Spectator
+# Hardcore: Lives
 The first mod of my 'Hardcore' mod collection, a mod that gives players 5 lives (configurable) before putting them into spectator.
 
 # Mod requirements

@@ -16,7 +16,7 @@ public class WorldConfiguration extends Configuration<WorldConfiguration> {
 
 	@Override
 	public String filename() {
-		return "hardcore-spectator.ccfg";
+		return "hardcore-lives.ccfg";
 	}
 
 	@Comment("The amount of lives each starting player has")

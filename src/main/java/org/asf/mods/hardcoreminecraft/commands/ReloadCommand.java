@@ -3,7 +3,7 @@ package org.asf.mods.hardcoreminecraft.commands;
 import java.io.IOException;
 
 import org.asf.cyan.api.common.CyanComponent;
-import org.asf.mods.hardcoreminecraft.HardcoreSpectator;
+import org.asf.mods.hardcoreminecraft.HardcoreLives;
 import org.fusesource.jansi.Ansi.Color;
 
 import modkit.commands.Command;
@@ -13,7 +13,7 @@ public class ReloadCommand extends CyanComponent implements Command {
 
 	@Override
 	public String getPermission() {
-		return "cyan.commands.admin.hardcore.spectator.reload";
+		return "cyan.commands.admin.hardcore.lives.reload";
 	}
 
 	@Override
@@ -28,7 +28,7 @@ public class ReloadCommand extends CyanComponent implements Command {
 
 	@Override
 	public String getDescription() {
-		return "Reloads the Harcore Spectator configuration";
+		return "Reloads the Harcore: Lives configuration";
 	}
 
 	@Override
@@ -39,10 +39,10 @@ public class ReloadCommand extends CyanComponent implements Command {
 	@Override
 	public int execute(CommandExecutionContext context) {
 		boolean error = false;
-		HardcoreSpectator mod = HardcoreSpectator.getInstance(HardcoreSpectator.class);
+		HardcoreLives mod = HardcoreLives.getInstance(HardcoreLives.class);
 		try {
-			HardcoreSpectator.getInstance(HardcoreSpectator.class).reload();
-			HardcoreSpectator.getInstance(HardcoreSpectator.class).getPlayers(context.getServer()).forEach(t -> {
+			HardcoreLives.getInstance(HardcoreLives.class).reload();
+			HardcoreLives.getInstance(HardcoreLives.class).getPlayers(context.getServer()).forEach(t -> {
 				try {
 					t.getInfo().readAll();
 				} catch (IOException e) {
@@ -50,7 +50,7 @@ public class ReloadCommand extends CyanComponent implements Command {
 				}
 			});
 		} catch (IOException e) {
-			error("Failed to reload the Hardcore Spectator configuration!", e);
+			error("Failed to reload the Hardcore: Lives configuration!", e);
 			error = true;
 		}
 		if (context.getPlayer() == null) {

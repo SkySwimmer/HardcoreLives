@@ -25,9 +25,9 @@ apply from: "asf.mvn.publish.gradle"
 
 // Project information
 group="org.asf.mods"
-version="1.0.0.A3"
+version="1.0.0.A4"
 
-def mod_id = "spectator"
+def mod_id = "lives"
 def mod_group = "hardcore"
 
 
@@ -44,10 +44,10 @@ if (majorVersion.split("\\.").length > 2)
     majorVersion = majorVersion.substring(0, majorVersion.lastIndexOf("."))
 
 // Mod information
-def mod_class_name = "HardcoreSpectator"
+def mod_class_name = "HardcoreLives"
 def mod_package_name = "org.asf.mods.hardcoreminecraft"
 
-def mod_display_name = "Hardcore: Spectator"
+def mod_display_name = "Hardcore: Lives"
 
 // ProtocolHooks Version
 def protocolHooksVersion = "1.1"
@@ -63,8 +63,11 @@ def modDescription = '''
 A replacement Hardcore mode for Minecraft.
 When the mod is installed and enabled, a player has 3 lives (configurable)
 
-After using up those lives, players won't be banned, but are put into spectator.
-This way, you can still see the game, even if you are no longer part of it.
+After using up those lives, players are put into spectator.
+
+NOTE:
+Vanilla minecraft already gives players the ability to spectate the world upon
+death for hardcore mode. It has been a feature since 1.9 that i did not know about.
 '''
 
 
@@ -294,7 +297,7 @@ processResources {
 }
 
 task javaDocs(type: Javadoc) {
-    title "Hardcore Spectator: $protocolHooksVersion"
+    title "Hardcore Lives: $protocolHooksVersion"
 	classpath = sourceSets.main.runtimeClasspath
 	source = sourceSets.main.allJava
 	exclude "**/internal/**"
@@ -302,7 +305,7 @@ task javaDocs(type: Javadoc) {
 }
 
 javadoc {
-    title "Hardcore Spectator: $protocolHooksVersion"
+    title "Hardcore Lives: $protocolHooksVersion"
 	exclude "**/internal/**"
 	exclude "**/org/asf/mods/**"
 }
@@ -330,7 +333,7 @@ build.finalizedBy rift
 rift.finalizedBy cmf
 
 configurePublish {
-	pretty_name "HardcoreSpectator"
+	pretty_name "HardcoreLives"
 	description "$modDescription"
 	page "https://aerialworks.ddns.net/maven"
 	address "https://aerialworks.ddns.net/maven"

@@ -1,7 +1,7 @@
 # Version Document
 
 group> 'hardcore'
-modid> 'spectator'
+modid> 'lives'
 
 # Channel names
 channels> {
@@ -19,15 +19,15 @@ channelFiles> {
 
     @fallback> {
         urls> {
-            @fallback> 'https://aerialworks.ddns.net/maven/org/asf/mods/HardcoreSpectator/%v/HardcoreSpectator-%v.cmf'
+            @fallback> 'https://aerialworks.ddns.net/maven/org/asf/mods/HardcoreLives/%v/HardcoreLives-%v.cmf'
         }
     }
 
     testing> {
         versions> {
-            1.16.5> '1.0.0.A3-1.16.5'
-            1.17> '1.0.0.A3-1.17'
-            1.17.1> '1.0.0.A3-1.17.1'
+            1.16.5> '1.0.0.A4-1.16.5'
+            1.17> '1.0.0.A4-1.17'
+            1.17.1> '1.0.0.A4-1.17.1'
         }
     }
 

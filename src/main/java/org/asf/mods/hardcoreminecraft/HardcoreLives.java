@@ -26,9 +26,9 @@ import org.asf.mods.hardcoreminecraft.config.PlayerInfo;
 import org.asf.mods.hardcoreminecraft.config.WorldConfiguration;
 import org.asf.mods.hardcoreminecraft.events.CommonEvents;
 
-public class HardcoreSpectator extends AbstractMod {
+public class HardcoreLives extends AbstractMod {
 
-	private ConfigManager<HardcoreSpectator> configManager;
+	private ConfigManager<HardcoreLives> configManager;
 	private HardcoreConfiguration hardcoreConfig;
 	private MessageConfiguration messages;
 
@@ -45,10 +45,10 @@ public class HardcoreSpectator extends AbstractMod {
 	@AttachEvent(value = "mods.init", synchronize = true)
 	public void init() throws IOException {
 
-		info("Initializing the Hardcore: Spectator mod configuration files...");
+		info("Initializing the Hardcore: Lives mod configuration files...");
 
 		// Load the configuration manager
-		configManager = ConfigManager.getFor(HardcoreSpectator.class);
+		configManager = ConfigManager.getFor(HardcoreLives.class);
 
 		// Load the configurations
 		hardcoreConfig = configManager.getConfiguration(HardcoreConfiguration.class);
@@ -56,7 +56,7 @@ public class HardcoreSpectator extends AbstractMod {
 
 		// Log amount of lives
 		info(messages.systemMessagePrefix + " " + messages.systemMessageColor + "Running " + Colors.GOLD
-				+ "Hardcore: Spectator" + messages.systemMessageColor + ", each player has " + hardcoreConfig.lives
+				+ "Hardcore: Lives" + messages.systemMessageColor + ", each player has " + hardcoreConfig.lives
 				+ " lives.");
 	}
 

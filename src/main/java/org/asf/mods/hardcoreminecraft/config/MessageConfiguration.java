@@ -6,11 +6,11 @@ import modkit.config.ModConfiguration;
 import modkit.util.Colors;
 
 import org.asf.cyan.api.config.annotations.Comment;
-import org.asf.mods.hardcoreminecraft.HardcoreSpectator;
+import org.asf.mods.hardcoreminecraft.HardcoreLives;
 
-public class MessageConfiguration extends ModConfiguration<MessageConfiguration, HardcoreSpectator> {
+public class MessageConfiguration extends ModConfiguration<MessageConfiguration, HardcoreLives> {
 
-	public MessageConfiguration(HardcoreSpectator instance) throws IOException {
+	public MessageConfiguration(HardcoreLives instance) throws IOException {
 		super(instance);
 	}
 
@@ -21,7 +21,7 @@ public class MessageConfiguration extends ModConfiguration<MessageConfiguration,
 
 	@Comment("The system message prefix (for the chat and in the console)")
 	public String systemMessagePrefix = Colors.DARK_PURPLE + "--[-- " + Colors.GOLD + "HC" + Colors.RESET + ":"
-			+ Colors.LIGHT_PURPLE + "SM" + Colors.DARK_PURPLE + " --]--";
+			+ Colors.LIGHT_PURPLE + "LM" + Colors.DARK_PURPLE + " --]--";
 
 	@Comment("The system message color")
 	public String systemMessageColor = Colors.DARK_AQUA;
