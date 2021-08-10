@@ -61,7 +61,7 @@ def modDescLanguageKey = "${mod_group}.${mod_id}.description" // Uses the group 
 // Fallback description
 def modDescription = '''
 A replacement Hardcore mode for Minecraft.
-When the mod is installed and enabled, a player has 3 lives (configurable)
+When the mod is installed and enabled, a player has 5 lives (configurable)
 
 After using up those lives, players are put into spectator.
 
